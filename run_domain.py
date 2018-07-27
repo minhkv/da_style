@@ -21,23 +21,29 @@ usps_autoencoder = Autoencoder(name="target")
 domain_adaptation = DomainAdaptation(mnist_autoencoder, usps_autoencoder)
 domain_adaptation.merge_all()
 
-r_1_fc = 1000
-r_2_rec = 1000
-r_3_df = 1000
+saver = tf.train.Saver()
+
+r_1_fc = 10
+r_2_rec = 10
+r_3_df = 10
 r_4_di = 10
 current_step = 0
 
-for step in (range(r_1_fc)):
-    batch_img, batch_label = mnist_data.next_batch_train() 
-    batch_target, label_target = usps_data.next_batch_train()
-    domain_adaptation.run_step1(batch_img, batch_target, batch_label,  step + current_step)
-current_step += r_1_fc
+# for step in (range(r_1_fc)):
+#     batch_img, batch_label = mnist_data.next_batch_train() 
+#     batch_target, label_target = usps_data.next_batch_train()
+#     domain_adaptation.run_step1(batch_img, batch_target, batch_label,  step + current_step)
+# current_step += r_1_fc
 
-for step in (range(r_2_rec)):
-    batch_img, batch_label = mnist_data.next_batch_train()
-    batch_target, label_target = usps_data.next_batch_train()
-    domain_adaptation.run_step2(batch_img, batch_target, batch_label,  step + current_step)
-current_step += r_2_rec
+# for step in (range(r_2_rec)):
+#     batch_img, batch_label = mnist_data.next_batch_train()
+#     batch_target, label_target = usps_data.next_batch_train()
+#     domain_adaptation.run_step2(batch_img, batch_target, batch_label,  step + current_step)
+# current_step += r_2_rec
+
+# save_path = saver.save(domain_adaptation.sess, "model/step2/model.ckpt")
+
+saver.restore(domain_adaptation.sess, "model/step2/model.ckpt")
 
 for step in (range(r_3_df)):
     batch_img, batch_label = mnist_data.next_batch_train()

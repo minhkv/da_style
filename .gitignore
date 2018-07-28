@@ -1,0 +1,8 @@
+MNIST_data/
+USPS_data/
+log/
+mnist_dataset.py
+*bak*
+**/*.pyc
+dcgan.py
+model

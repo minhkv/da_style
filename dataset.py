@@ -22,7 +22,8 @@ class Dataset:
         return resized_imgs
     def _reshape_images(self, imgs):
         return imgs.reshape((-1, 16, 16, 1))
-        
+    def _sample_dataset(self):
+        pass
     def next_batch_train(self):
         addition_from_start = 0
         start = self.current_index
